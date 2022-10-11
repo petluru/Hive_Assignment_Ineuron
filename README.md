@@ -22,9 +22,6 @@
       Query:   select year_id,sum(sales) `Total Sales` from sales_order_orc  group by year_id 
                 order by `Total Sales` desc;
 
-      ScreenShot:
-      ![image](https://user-images.githubusercontent.com/36133568/194927559-bcd715c8-c6e8-4a98-b9e5-181de328f778.png)
-      ![image](https://user-images.githubusercontent.com/36133568/194927585-03d819f2-cea7-4b11-ba3b-416a4a504f76.png)
       
       Output:
         Year     Total Sales
@@ -39,7 +36,7 @@
       Output:
        S18_3232        52
        
-      ![image](https://user-images.githubusercontent.com/36133568/194927848-6090466a-6dc7-49ad-b854-364134c47c61.png)
+     
 
   c.	Calculate the total sales for each quarter
       Query: select qtr_id,sum(sales) from sales_order_orc
@@ -49,7 +46,7 @@
                 Quarter 3: 1758910.80
                 Quarter 4: 3874780.01
 
-     ![image](https://user-images.githubusercontent.com/36133568/194927947-2e22ad96-65a3-4bc0-b4cd-01e62dc65de8.png)
+     
   d.	In which quarter sales was minimum
       Query: 
        select qtr_id,sum(sales) `TotalSales` from sales_order_orc
@@ -58,7 +55,7 @@
        
        Output:     3
        
-       ![image](https://user-images.githubusercontent.com/36133568/194928067-56f4ba1e-90af-4fb3-abe1-0739b1a82eb9.png)
+       
        
        
   e.	In which country sales was maximum and in which country sales was minimum.
@@ -71,7 +68,7 @@
         
         Output: USA
         
-        ![image](https://user-images.githubusercontent.com/36133568/194928231-f992e208-e79f-436a-9719-8ae7d4f69e37.png)
+        
       
      Query(Min):
        select country,SUM(sales) `TotalSales`
@@ -97,11 +94,18 @@
 
    g.	Find a month for each year in which maximum number of quantities were sold
     
-
+        Query: with CTE_1 as (
+               select year_id,month_id,sum(QUANTITYORDERED) as Q from sales_order_data_csv
+                group by year_id,month_id order by Q desc
+               )
+               select year_id,max(Q) from CTE_1
+               group by year_id;
         
 
-
-       
+       Result:
+       2003    11      10179
+       2004    11      10678
+       2005    5       4357
        
 
 
